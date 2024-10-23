@@ -1,0 +1,68 @@
+<% content_for :title, "Exhibitions" %>
+
+<div class="d-flex justify-content-center my-0 mx-2 p-0">
+    <div class="w-100 w-sm-75", id="exhibitions">   
+    
+      <% if notice %>
+        <p class="my-2">
+          <span class="d-block notice" style="color: red"> <strong> <%= notice %> </strong> </span>
+        </p>
+      <% end %>
+
+      <% if @comment && @comment.errors.any? %>
+        <div id="error_explanation" class="mx-2"  style="color: red">
+          <h2><%= pluralize(@comment.errors.count, "Error: ") %> No es posible guardar comentario</h2>
+          <ul>
+            <% @comment.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <%= render @exhibition %>
+
+      <%= render "comments/form", comment: @comment, exhibition: @exhibition %>
+
+      <br>
+        <% if @exhibition.comments.count > 0%>
+          <h2> Comentarios </h2>
+      <% end %>
+
+      <% @exhibition.comments.order(created_at: :desc).each do |comment| %> <!-- Itero sobre los comentarios de cada exhibition -->
+
+        <strong><%= comment.created_at.strftime("%d-%m-%Y %H:%M") %></strong><br>
+        <div class="d-flex align-items-start my-2 border border-2 border-secondary-subtle rounded">
+            
+            <div class="ms-2 mt-1"> 
+                <% if comment.user.picture.attached? %>
+                    <%= image_tag comment.user.picture, class: "img-fluid rounded-circle", style: "max-width: 50px; max-height: 50px; width: 100%; height: auto;" if comment.user.picture.attached? %>
+                <% end %>
+            </div>
+                    
+            <div class="flex-grow-1 ms-2 mb-2"> 
+                <% if comment.user %>
+                    <strong>@<%= comment.user.name.delete(' ') %></strong>
+                <% else %>
+                    <strong> *** Comentario sin USER ***</strong>
+                <% end %>
+                <br>
+                <%= comment.context %>
+            </div>
+            <br>
+        </div>
+
+        <% if user_signed_in? %> 
+            <% if ( current_user.author? ||  current_user.admin?) %> 
+                <%= button_to "Eliminar comentario", exhibition_comment_path(@exhibition, comment), method: :delete, data: { confirm: "¿Estás seguro de que deseas eliminar este comentario?" }, class: "mb-3 btn btn-warning" %>
+            <% end %>
+        <% end %>
+      <% end %>
+      
+      <%= link_to "Regresar", exhibitions_path, class: "btn btn-primary mt-1 py-2" %>
+      <br>
+      <br>
+    </div>
+  </div>
+</div>
+

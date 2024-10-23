@@ -1,0 +1,53 @@
+
+<div class="d-flex justify-content-center my-0 mx-2 p-0">
+    <div class="w-100 w-sm-75 mx-sm-auto", id="exhibitions">
+
+        <% if notice %>
+            <p class="my-2">
+                <span class="d-block notice" style="color: red"> <strong> <%= notice %> </strong> </span>
+            </p>
+        <% end %>
+
+        <% @total = @exhibitions.count %>
+        <% @exhibitions.each_with_index do |exhibition, index| %>
+        
+            <% @lugar = @total - index %>
+
+            <%= render exhibition %>
+
+            <% if (comment = exhibition.comments.last) %>  <!-- Verifico si existe el último comentario y si existe lo asigno -->
+          
+                <h6 class="mt-4"> <strong>Último comentario. </strong>Realizado el <%= comment.created_at.strftime("%d-%m-%Y %H:%M") %> </h6>
+
+                <div class="d-flex align-items-start my-2 border border-2 border-secondary-subtle rounded">
+    
+                    <div class="ms-2 mt-1"> 
+                        <% if comment.user.picture.attached? %>
+                            <%= image_tag comment.user.picture, class: "img-fluid rounded-circle", style: "max-width: 50px; max-height: 50px; width: 100%; height: auto;" if comment.user.picture.attached? %>
+                        <% end %>
+                    </div>
+                    
+                    <div class="flex-grow-1 ms-2 mb-2"> 
+                        <% if comment.user %>
+                            <strong>@<%= comment.user.name.delete(' ') %></strong>
+                        <% else %>
+                            <strong>@</strong>
+                        <% end %>
+                        <br>
+                        <%= comment.context %>
+                    </div>
+
+                </div>
+     
+                <% if exhibition.comments.count > 1 %>
+                    <%= link_to "Ver todos los comentarios ".html_safe + "<span class='top-0 badge rounded-pill bg-danger'> + #{exhibition.comments.count - 1} </span>".html_safe, exhibition, class: "btn btn-success mt-2" %>
+                <% end %>
+
+            <% end %>
+
+            <%= render "comments/form", comment: @comment, exhibition: exhibition %>
+            <br>
+        <% end %>
+    </div>
+    <br>
+</div>

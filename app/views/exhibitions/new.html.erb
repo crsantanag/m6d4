@@ -1,0 +1,29 @@
+<% content_for :title, "New exhibition" %>
+
+<h1>Crear exhibición</h1>
+
+  <% if notice %>
+      <p class="my-3">
+        <span class="d-block notice" style="color: red"> <strong> <%= notice %> </strong> </span>
+      </p>
+  <% end %>
+
+  <% if @exhibition.errors.any? %>
+      <div id="error_explanation" class="mx-2"  style="color: red">
+        <h2><%= pluralize(@comment.errors.count, "Error. ") %> No es posible crear exhibición por: </h2>
+        <ul>
+          <% @exhibition.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+  <% end %>
+
+  <%= render "form", exhibition: @exhibition %>
+
+
+  <br>
+
+  <div>
+    <%= link_to "Regresar", exhibitions_path, class: "btn btn-light" %>
+  </div>

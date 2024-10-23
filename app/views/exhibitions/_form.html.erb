@@ -1,0 +1,37 @@
+<%= form_with(model: exhibition) do |form| %>
+
+  <% if exhibition.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(exhibition.errors.count, "Error.") %> No es posible crear exhibición por: </h2>
+
+      <ul>
+        <% exhibition.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field my-2">
+    <%= form.label :title, "Título" %><br />
+    <%= form.text_field :title, autofocus: true, required: true, autocomplete: "title", class: "ps-2 col-12 col-sm-6 border rounded-2", style:"height: 35px" %>
+  </div>
+
+    <div class="field my-2">
+    <%= form.label :description, "Descripción" %><br />
+    <%= form.text_area :description, autofocus: true, required: true, autocomplete: "description", class: "ps-2 col-12 col-sm-6 border rounded-2", rows: 3 %>
+  </div>
+
+  <div class="field my-2">
+    <%= form.label :pictures, "Formato relación 2:1 - Tamaño máx 1 Mb", class: "col-12 col-sm-8" %>
+    <br>
+    <div class="my-2 col-12 col-md-8">
+    <%= form.file_field :pictures, multiple: true, class: "ps-2 py-1 col-12 col-sm-8 border rounded-2 border border-2 border-secondary-subtle rounded" %>
+    </div>
+  </div>
+  <br>
+
+  <div>
+    <%= form.submit "Crear", class: "btn btn-secondary" %>
+  </div>
+<% end %>

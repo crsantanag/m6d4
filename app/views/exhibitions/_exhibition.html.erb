@@ -1,0 +1,73 @@
+<div id="<%= dom_id exhibition %>">
+
+    <h5>Creado el <%= exhibition.created_at.strftime("%d-%m-%Y %H:%M") %></h5>
+
+    <% if controller_name == "exhibitions" %>
+        <% if action_name == "index" %>
+            <h2><%= @lugar %>. <%= exhibition.title %></h2> 
+        <% else %>
+        <h2><%= exhibition.title %></h2> 
+        <% end %>
+    <% end %>
+
+    <p> <%= exhibition.description %> </p>
+    
+    <% if exhibition.pictures.attached? %>
+  
+        <% if exhibition.pictures.size > 1 %>
+
+            <div id="carouselExampleFade" class="carousel slide carousel-fade">
+
+                <div class="carousel-inner">
+                    <% exhibition.pictures.each_with_index do |picture, index| %>
+                        <div class="carousel-item <%= 'active' if index == 0 %>">
+                            <%= image_tag picture, class: "d-block w-100" %>
+                        </div>
+                    <% end %>
+                </div>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+
+        <% else %>
+  
+            <% exhibition.pictures.each do |image| %>
+                <%= image_tag image, class: "img-fluid w-100"%>
+            <% end %>
+
+        <% end %>
+
+        <div class="d-flex justify-content-start align-items-center my-2"> 
+            <% if controller_name == "exhibitions" %>
+                
+                <% if action_name == "index" %>
+
+                    <%= link_to "Ver artículo ", exhibition, class: "btn btn-primary me-3" %>
+                    <span class="btn-success"> 
+                        <strong> Comentarios asociados </strong> <span class="top-0 badge rounded-pill bg-danger"> + <%= exhibition.comments.count %> </span>
+                    </span>
+
+                <% elsif action_name == "show" %>
+
+                    <% if user_signed_in? %>
+                        <% if ( current_user.author? ||  current_user.admin?) %> 
+
+                            <%= button_to "Eliminar exhibición", @exhibition, method: :delete, data: { confirm: "¿Está seguro?" }, class: "col-3 col-md-1  py-2 btn btn-danger", style:"width: 200px" %>
+                        <% end %>
+                    <% end %>
+
+                <% end %>
+
+            <% end%>
+        </div>
+
+  <% end %>
+
+</div>

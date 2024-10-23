@@ -1,0 +1,54 @@
+
+    <nav class="px-2 px-md-10 mx-0 navbar navbar-expand-lg bg-body-tertiary fixed-top border-top border-bottom border-2 border-info">
+        <div class="container-fluid">
+
+            <strong> <%= link_to "Karina's pictures", root_path, class: 'navbar-brand' %> </strong>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item ">
+                        <%= link_to "Exhibitions", exhibitions_path, class:"nav-link btn btn-light fs-5 me-3" %>
+                    </li>
+                    <li class="nav-item">
+                        <% if user_signed_in? %> 
+                            <% if ( current_user.author? ||  current_user.admin?) %> 
+                                <%= link_to "Create exhibition", new_exhibition_path, class:"nav-link active btn btn-info fs-5" %>
+                            <% end %>
+                        <% end %>
+                    </li>
+                </ul> 
+
+                <div class="d-flex mx-2 justify-content-end align-items-center">
+                    <% if user_signed_in? %>
+                        <% if current_user.picture.attached? %>
+                            <div class="d-flex justify-content-center">
+                            <%= image_tag current_user.picture, class: "img-fluid rounded-circle mx-2", style: "max-width: 70px; max-height: 70px; width: 100%; height: auto;" %>
+                            </div>
+                        <% end %>
+
+                        <% if current_user.name.present? %>
+                            <span class="text-dark fs-4"> Bienvenido(a) </span> <%= link_to current_user.name, edit_user_registration_path(@user),  class: "mx-2 btn btn-primary" %>
+                        <% else %>
+                            <span class="text-dark fs-4 mx-2"> Bienvenido(a) <%= link_to current_user.email, edit_user_registration_path(@user),  class: "mx-2 btn btn-primary" %> </span> 
+                        <% end %>
+
+                        <%= button_to "Cerrar sesión", destroy_user_session_path, class: "btn btn-secondary", method: :delete %>
+                    <% else %>
+                        <div>
+                            <%= link_to "Iniciar sesión", new_user_session_path,   class: "btn btn-secondary" %>
+                            <%= link_to "Registrarse", new_user_registration_path, class: "btn btn-secondary" %>
+                        </div>
+                    <% end %>
+                </div>
+
+            </div>
+
+        </div>
+
+    </nav>
+
