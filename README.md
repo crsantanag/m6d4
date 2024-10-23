@@ -1,24 +1,23 @@
-# README
+![Banner](banner.jpg)  
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Módulo 6 - Desafío 4
+# Carlos Santana
 
-Things you may want to cover:
+Ruby on Rails - postgresql
 
-* Ruby version
+## Descripción
 
-* System dependencies
+... En construccion ... (esta noche queda listo)  
 
-* Configuration
+## Ejecutando las pruebas
+Levanta el servidor y prueba la aplición.  
+root está en /  
+  
+Este proyecto no cuenta con pruebas automatizadas. Puedes probar manualmente todas las funcionalidades.  
+  
+## Licencia  
+  
+Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE.md](LICENSE.md) para obtener más detalles.  
+  
+⌨ ️Carlos Santana (https://github.com/crsantanag)
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
