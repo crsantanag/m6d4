@@ -5,7 +5,8 @@ class Exhibition < ApplicationRecord
 
   validates :title,
   presence: { message: "No puede estar vacío" },
-  length: { in: 1..100, message: "debe tener entre 2 y 100caracteres" }
+  length: { in: 1..100, message: "debe tener entre 2 y 100 caracteres" }
+
   validates :description,
   presence: { message: "No puede estar vacío" },
   length: { in: 1..1000, message: "debe tener entre 2 y 1000 caracteres" }

@@ -1,9 +1,10 @@
 source "https://rubygems.org"
 
 gem "figaro"
-gem "faker"
 gem "activestorage"
 gem "aws-sdk-s3"
+
+gem "devise", "~> 4.9"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.2.1", ">= 7.2.1.1"
@@ -60,5 +61,3 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
-
-gem "devise", "~> 4.9"
