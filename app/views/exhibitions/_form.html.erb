@@ -19,19 +19,19 @@
 
     <div class="field my-2">
     <%= form.label :description, "Descripción" %><br />
-    <%= form.text_area :description, autofocus: true, required: true, autocomplete: "description", class: "ps-2 col-12 col-sm-6 border border-2 rounded-2 border-secondary-subtle", rows: 3 %>
+    <%= form.text_area :description, required: true, autocomplete: "description", class: "ps-2 col-12 col-sm-6 border border-2 rounded-2 border-secondary-subtle", rows: 3 %>
   </div>
 
   <div class="field my-2">
     <%= form.label :pictures, "Formato relación 2:1 - Tamaño máx 1 Mb", class: "col-12 col-sm-8" %>
     <br>
     <div class="my-2 col-12 col-md-8"> 
-    <%= form.file_field :pictures, multiple: true, class: "ps-2 py-1 col-12 col-sm-8 border rounded-2 border border-2 border-secondary-subtle rounded" %>
+    <%= form.file_field :pictures, required: true, multiple: true, class: "ps-2 py-1 col-12 col-sm-8 border rounded-2 border border-2 border-secondary-subtle rounded" %>
     </div>
   </div>
   <br>
 
   <div>
-    <%= form.submit "Crear", class: "btn btn-secondary" %>
+    <%= form.submit "Crear", class: "btn btn-secondary", style: "width:100px" %>
   </div>
 <% end %>

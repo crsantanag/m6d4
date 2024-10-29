@@ -1,5 +1,14 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user!, except: [ :index ]
   before_action :set_exhibition, only: [ :create ]
+
+  before_action only: [ :destroy ] do
+    authorize_request([ "author", "admin" ])
+  end
+
+  def index
+    @comment = Comment.all
+  end
 
   def create
     @comment = Comment.new(comment_params)

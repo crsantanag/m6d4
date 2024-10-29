@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   root "pages#index"
-  resources :comments # Elimino rutas directas a comentarios para que éstos sólo puedan ser creados a través de artículos.
+  resources :comments, only: [ :create, :destroy ] # Elimino rutas directas a comentarios para que éstos sólo puedan ser creados a través de artículos.
 
   resources :exhibitions, except: [ :index ] do
-    resources :comments
+    resources :comments, only: [ :create, :destroy ]
   end
 
   devise_for :users, controllers: {

@@ -22,10 +22,10 @@
 
       <%= render @exhibition %>
 
-      <%= render "comments/form", comment: @comment, exhibition: @exhibition %>
+      <%= render "comments/form", comment: @comment, exhibition: @exhibition %> 
 
       <br>
-        <% if @exhibition.comments.count > 0%>
+      <% if @exhibition.comments.count > 0%>
           <h2> Comentarios </h2>
       <% end %>
 
@@ -59,7 +59,7 @@
         <% end %>
       <% end %>
       
-      <%= link_to "Regresar", exhibitions_path, class: "btn btn-primary mt-1 py-2" %>
+      <%= link_to "Regresar", exhibitions_path, class: "btn btn-primary mt-2", style: "width:100px" %>
       <br>
       <br>
     </div>
